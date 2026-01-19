@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استبيان النادي السعودي - كولشستر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a472a;
+            --secondary-color: #2d5a3d;
+            --accent-color: #c9a227;
+            --gold: #d4af37;
+            --dark-bg: #0f2818;
+            --card-bg: #163020;
+            --text-primary: #ffffff;
+            --text-secondary: #a8b5a0;
+            --border-color: #2d5a3d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0a1f12 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.8;
+        }
+        
+        .header {
+            background: linear-gradient(180deg, var(--primary-color) 0%, var(--dark-bg) 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .hero-logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 0 40px rgba(201, 162, 39, 0.4);
+            overflow: hidden;
+            background: var(--card-bg);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .hero-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .intro-box {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .intro-box p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .question {
+            margin-bottom: 1.5rem;
+        }
+        
+        .question:last-child {
+            margin-bottom: 0;
+        }
+        
+        .question label {
+            display: block;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+        
+        .required::after {
+            content: ' *';
+            color: #ff6b6b;
+        }
+        
+        select, input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        
+        select option {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+        }
+        
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--dark-bg);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        
+        .checkbox-item:hover, .radio-item:hover {
+            border-color: var(--accent-color);
+        }
+        
+        .checkbox-item input, .radio-item input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--accent-color);
+            cursor: pointer;
+        }
+        
+        .checkbox-item span, .radio-item span {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        .checkbox-item:has(input:checked), .radio-item:has(input:checked) {
+            border-color: var(--accent-color);
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .checkbox-item:has(input:checked) span, .radio-item:has(input:checked) span {
+            color: var(--text-primary);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-color), var(--gold));
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 10px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+        
+        .footer span {
+            color: var(--accent-color);
+        }
+        
+        /* Success/Error Messages */
+        .message {
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        
+        .message.success {
+            background: rgba(39, 174, 96, 0.2);
+            border: 2px solid #27ae60;
+            color: #27ae60;
+        }
+        
+        .message.error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 2px solid #e74c3c;
+            color: #e74c3c;
+        }
+        
+        .message h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header {
+                padding: 2rem 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero-logo {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .section {
+                padding: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="hero-logo">
+            <img src="https://i.imgur.com/placeholder.png" alt="شعار النادي السعودي" onerror="this.style.display='none'">
+        </div>
+        <h1>🇸🇦 استبيان النادي السعودي في كولشستر</h1>
+        <p>نسعد بمعرفة آرائكم لتطوير أنشطة النادي</p>
+    </header>
+    
+    <div class="container">
+        <!-- Success Message -->
+        <div id="successMessage" class="message success">
+            <h3>✅ تم إرسال الاستبيان بنجاح!</h3>
+            <p>شكراً لمشاركتك معنا. ردودك ستساعدنا في تطوير النادي.</p>
+        </div>
+        
+        <!-- Error Message -->
+        <div id="errorMessage" class="message error">
+            <h3>❌ حدث خطأ</h3>
+            <p>لم نتمكن من إرسال الاستبيان. يرجى المحاولة مرة أخرى.</p>
+        </div>
+        
+        <!-- Survey Form -->
+        <form id="surveyForm">
+            <div class="intro-box">
+                <p>نرجو منكم تخصيص بضع دقائق للإجابة على هذا الاستبيان. آراؤكم مهمة جداً لنا لتقديم أفضل الخدمات والفعاليات.</p>
+            </div>
+            
+            <!-- Section 1: Personal Information -->
+            <div class="section">
+                <h2 class="section-title">📋 المعلومات الشخصية</h2>
+                
+                <div class="question">
+                    <label class="required">الجنس</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="gender" value="ذكر" required>
+                            <span>ذكر</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="gender" value="أنثى">
+                            <span>أنثى</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="required">الفئة العمرية</label>
+                    <select name="age" required>
+                        <option value="">اختر الفئة العمرية</option>
+                        <option value="18-24">18 - 24 سنة</option>
+                        <option value="25-30">25 - 30 سنة</option>
+                        <option value="31-40">31 - 40 سنة</option>
+                        <option value="41+">41 سنة فأكثر</option>
+                    </select>
+                </div>
+                
+                <div class="question">
+                    <label class="required">المرحلة الدراسية</label>
+                    <select name="studyLevel" required>
+                        <option value="">اختر المرحلة الدراسية</option>
+                        <option value="لغة">لغة إنجليزية</option>
+                        <option value="تأسيسي">سنة تأسيسية</option>
+                        <option value="بكالوريوس">بكالوريوس</option>
+                        <option value="ماجستير">ماجستير</option>
+                        <option value="دكتوراه">دكتوراه</option>
+                        <option value="مرافق">مرافق/مرافقة</option>
+                    </select>
+                </div>
+                
+                <div class="question">
+                    <label>هل معك عائلة في كولشستر؟</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="hasFamily" value="نعم">
+                            <span>نعم</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="hasFamily" value="لا">
+                            <span>لا</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 2: Preferred Activities -->
+            <div class="section">
+                <h2 class="section-title">🎯 الأنشطة المفضلة</h2>
+                
+                <div class="question">
+                    <label>ما هي الأنشطة التي تود أن يقدمها النادي؟ (اختر كل ما يناسبك)</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="activities" value="أنشطة ثقافية">
+                            <span>أنشطة ثقافية (احتفالات وطنية، أمسيات أدبية)</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="activities" value="أنشطة رياضية">
+                            <span>أنشطة رياضية (كرة قدم، سباحة، مشي)</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="activities" value="أنشطة اجتماعية">
+                            <span>أنشطة اجتماعية (لقاءات تعارف، حفلات استقبال)</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="activities" value="محاضرات وورش عمل">
+                            <span>محاضرات وورش عمل</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="activities" value="رحلات ترفيهية">
+                            <span>رحلات ترفيهية</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="activities" value="فعاليات عائلية">
+                            <span>فعاليات عائلية</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="activities" value="أنشطة دينية">
+                            <span>أنشطة دينية</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 3: Preferences -->
+            <div class="section">
+                <h2 class="section-title">⏰ التفضيلات</h2>
+                
+                <div class="question">
+                    <label>كم مرة تفضل إقامة الفعاليات؟</label>
+                    <select name="eventFrequency">
+                        <option value="">اختر التكرار</option>
+                        <option value="أسبوعياً">أسبوعياً</option>
+                        <option value="كل أسبوعين">كل أسبوعين</option>
+                        <option value="شهرياً">شهرياً</option>
+                        <option value="كل ثلاثة أشهر">كل ثلاثة أشهر</option>
+                    </select>
+                </div>
+                
+                <div class="question">
+                    <label>الأوقات المفضلة لإقامة الفعاليات:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="preferredTime" value="نهاية الأسبوع">
+                            <span>نهاية الأسبوع (السبت والأحد)</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="preferredTime" value="أيام الأسبوع مساءً">
+                            <span>أيام الأسبوع مساءً</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="preferredTime" value="أيام الأسبوع نهاراً">
+                            <span>أيام الأسبوع نهاراً</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 4: Expectations -->
+            <div class="section">
+                <h2 class="section-title">🎯 التوقعات من النادي</h2>
+                
+                <div class="question">
+                    <label>ما هي توقعاتك من النادي السعودي؟ (اختر كل ما يناسبك)</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="expectations" value="بيئة اجتماعية داعمة">
+                            <span>توفير بيئة اجتماعية داعمة</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="expectations" value="فعاليات منتظمة">
+                            <span>تنظيم فعاليات منتظمة</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="expectations" value="المساعدة في التأقلم">
+                            <span>المساعدة في التأقلم مع الحياة في بريطانيا</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="expectations" value="ربط الطلاب">
+                            <span>ربط الطلاب ببعضهم البعض</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="expectations" value="دعم إداري واستشاري">
+                            <span>تقديم الدعم الإداري والاستشاري</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="expectations" value="الحفاظ على الهوية">
+                            <span>الحفاظ على الهوية الثقافية السعودية</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="expectations" value="معلومات عن الخدمات">
+                            <span>توفير معلومات عن الخدمات المحلية</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 5: Communication -->
+            <div class="section">
+                <h2 class="section-title">📱 التواصل</h2>
+                
+                <div class="question">
+                    <label>طرق التواصل المفضلة:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="communication" value="واتساب">
+                            <span>مجموعات واتساب</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="communication" value="وسائل التواصل">
+                            <span>حسابات وسائل التواصل الاجتماعي</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="communication" value="البريد الإلكتروني">
+                            <span>البريد الإلكتروني</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="communication" value="موقع إلكتروني">
+                            <span>موقع إلكتروني للنادي</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label>هل أنت مهتم بالتطوع في تنظيم الفعاليات؟</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="volunteer" value="نعم">
+                            <span>نعم، أود المشاركة</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="volunteer" value="ربما">
+                            <span>ربما في المستقبل</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="volunteer" value="لا">
+                            <span>لا، أفضل الحضور فقط</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 6: Suggestions -->
+            <div class="section">
+                <h2 class="section-title">💡 الاقتراحات</h2>
+                
+                <div class="question">
+                    <label>هل لديك أي اقتراحات أو أفكار لتطوير النادي؟</label>
+                    <textarea name="suggestions" placeholder="شاركنا أفكارك واقتراحاتك..."></textarea>
+                </div>
+                
+                <div class="question">
+                    <label>معلومات التواصل (اختياري)</label>
+                    <input type="text" name="contactInfo" placeholder="البريد الإلكتروني أو رقم الواتساب">
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                ✉️ إرسال الاستبيان
+            </button>
+        </form>
+        
+        <div class="footer">
+            <p>شكراً لوقتك ومشاركتك معنا 🇸🇦</p>
+            <p><span>النادي السعودي في كولشستر</span></p>
+        </div>
+    </div>
+
+    <script>
+        // ⚠️ IMPORTANT: Replace this URL with your Google Apps Script Web App URL
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwpAdd_5cA_rvJcYfWD8ScMWylU3PdUSft04xopqaCMBd2la-gNGHgOIqmveLNKLFeAwQ/exec';
+        
+        document.getElementById('surveyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const form = this;
+            
+            // Hide any previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ جاري الإرسال...';
+            
+            // Collect form data
+            const formData = new FormData(form);
+            const data = {
+                timestamp: new Date().toLocaleString('ar-SA'),
+                gender: formData.get('gender') || '',
+                age: formData.get('age') || '',
+                studyLevel: formData.get('studyLevel') || '',
+                hasFamily: formData.get('hasFamily') || '',
+                activities: formData.getAll('activities').join('، ') || '',
+                eventFrequency: formData.get('eventFrequency') || '',
+                preferredTime: formData.getAll('preferredTime').join('، ') || '',
+                expectations: formData.getAll('expectations').join('، ') || '',
+                communication: formData.getAll('communication').join('، ') || '',
+                volunteer: formData.get('volunteer') || '',
+                suggestions: formData.get('suggestions') || '',
+                contactInfo: formData.get('contactInfo') || ''
+            };
+            
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                // Since we're using no-cors, we assume success
+                successMessage.style.display = 'block';
+                form.reset();
+                form.style.display = 'none';
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = '✉️ إرسال الاستبيان';
+            }
+        });
+    </script>
+</body>
+</html>
