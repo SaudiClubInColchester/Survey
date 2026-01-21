@@ -32,27 +32,29 @@
             line-height: 1.8;
         }
         
-        .header {
-            background: linear-gradient(180deg, var(--primary-color) 0%, var(--dark-bg) 100%);
-            padding: 3rem 2rem;
+        .hero {
             text-align: center;
-            border-bottom: 2px solid var(--accent-color);
+            padding: 4rem 2rem;
+            background: linear-gradient(180deg, var(--primary-color) 0%, var(--dark-bg) 100%);
         }
         
         .hero-logo {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 1.5rem;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 2rem;
             border-radius: 50%;
             border: 4px solid var(--accent-color);
             box-shadow: 0 0 40px rgba(201, 162, 39, 0.4);
+            animation: float 3s ease-in-out infinite;
             overflow: hidden;
             background: var(--card-bg);
-            animation: float 3s ease-in-out infinite;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
+        }
+        
+        .hero-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
         
         @keyframes float {
@@ -60,15 +62,24 @@
             50% { transform: translateY(-10px); }
         }
         
-        .header h1 {
-            font-size: 2rem;
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
             color: var(--accent-color);
-            margin-bottom: 0.5rem;
         }
         
-        .header p {
+        .hero p {
+            font-size: 1.2rem;
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .hero .welcome-msg {
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-top: 1.5rem;
+            font-weight: 700;
         }
         
         .container {
@@ -307,18 +318,17 @@
                 padding: 1rem;
             }
             
-            .header {
+            .hero {
                 padding: 2rem 1rem;
             }
             
-            .header h1 {
+            .hero h1 {
                 font-size: 1.5rem;
             }
             
             .hero-logo {
-                width: 120px;
-                height: 120px;
-                font-size: 3rem;
+                width: 140px;
+                height: 140px;
             }
             
             .section {
@@ -336,8 +346,14 @@
     </style>
 </head>
 <body>
-
-    
+    <section class="hero">
+        <div class="hero-logo">
+            <img src="YOUR_LOGO_URL_HERE" alt="شعار النادي السعودي">
+        </div>
+        <h1>🎾 استبيان التسجيل في فعالية البادل</h1>
+        <p>النادي السعودي في كولشستر</p>
+        <p class="welcome-msg">سجّل الآن وانضم إلينا!</p>
+    </section>
     
     <div class="container">
         <!-- Success Message -->
@@ -540,7 +556,7 @@
 
     <script>
         // ⚠️ IMPORTANT: Replace this URL with your Google Apps Script Web App URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbws4c_ZhsMrbIymoqmWIqD3aUAxkiOSkHTVr43PJhNSVXlxGGvJFqNRoIlV9rWtVjalzQ/exec';
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
         
         // Show/Hide conditional question for equipment type
         const hasEquipmentYes = document.getElementById('hasEquipmentYes');
